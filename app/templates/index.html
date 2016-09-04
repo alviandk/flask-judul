@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<style type="text/css">
+	.box {
+  float: left;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+}
+.after-box {
+  clear: left;
+}
+</style>
+    <form action="" method="post">
+      <p><input type="submit" value="Buat Rekomendasi Judul"></p>
+    </form>
+    <p>
+      {{kolom_1}} {{kolom_2}} {{kolom_sambung}} {{kolom_3}}
+    </p>
+    {% if review %}
+    	<a style="text-decoration: none" target="_blank" href="https://scholar.google.com/scholar?q={{kolom_1}} {{kolom_2}} {{kolom_sambung}} {{kolom_3}}"><input type="button" value="Literatur Review Google Scholar"></a>
+    	<a style="text-decoration: none" target="_blank" href="http://library.gunadarma.ac.id/epaper/search/?q={{kolom_2}}&judul=&nama=&pembimbing="><input type="button" value="Literatur Review Gunadarma"></a>
+    {% endif %}
+    <br>
+    <div class="box">
+	    <h2>Kolom 1</h2>
+	    <br>
+	    <ol>
+	    	{% for field in isi_kolom_1 %}
+	    		<li>{{field.word}}</li>
+	    	{% endfor %}
+	    </ol>
+	</div>
+	<div class="box">
+	    <h2>Kolom 2</h2>
+	    <a href="/update-kolom-2">Update Isi Kolom 2</a><br>
+	    <ol>
+	    	{% for field in isi_kolom_2 %}
+	    		<li>{{field.word}}</li>
+	    	{% endfor %}
+	    </ol>
+	</div>
+	<div class="box">
+	    <h2>Kolom 3</h2>
+	    <br>
+	    <ol>
+		    {% for field in isi_kolom_3 %}
+		    	<li>{{field.word}}</li>
+		    {% endfor %}
+		</ol>
+	</div>
+	<div class="box">
+	    <h2>Kata Penghubung</h2>
+	    <ol>
+		    {% for field in isi_kolom_sambung %}
+		    	<li>{{field.word}}</li>
+		    {% endfor %}
+	    </ol>
+	</div>
+	
+    
+
+{% endblock %}
