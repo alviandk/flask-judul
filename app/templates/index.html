@@ -9,18 +9,55 @@
 }
 .after-box {
   clear: left;
+  margin-bottom: 150px;
 }
 </style>
     <form action="" method="post">
       <p><input type="submit" value="Buat Rekomendasi Judul"></p>
     </form>
-    <p>
-      {{kolom_1}} {{kolom_2}} {{kolom_sambung}} {{kolom_3}}
-    </p>
-    {% if review %}
-    	<a style="text-decoration: none" target="_blank" href="https://scholar.google.com/scholar?q={{kolom_1}} {{kolom_2}} {{kolom_sambung}} {{kolom_3}}"><input type="button" value="Literatur Review Google Scholar"></a>
-    	<a style="text-decoration: none" target="_blank" href="http://library.gunadarma.ac.id/epaper/search/?q={{kolom_2}}&judul=&nama=&pembimbing="><input type="button" value="Literatur Review Gunadarma"></a>
-    {% endif %}
+      
+    	
+    <div class="box" style="width:700px">
+    	{% if review %}
+    	<h2>Rekomendasi Judul</h2>
+    	{% endif %}
+	    {% for judul in juduls.judul %}
+    		{{judul}} ---> <a style="text-decoration: none" target="_blank" href="https://scholar.google.com/scholar?q={{judul}}">Google Scholar</a>
+    		<br>
+    	{% endfor %}
+	</div>
+	<div class="box" style="width:100px">
+		{% if review %}
+		<h2>Hits Google</h2>
+		{% endif %}
+	    {% for hits_google in juduls.hits_google %}
+    		{{hits_google}}
+    		<br>
+    	{% endfor %}
+	</div>
+	<div class="box" style="width:100px">
+		{% if review %}
+		<h2>Hits</h2>
+		{% endif %}
+	    {% for hits in juduls.hits %}
+    		{{hits}}
+    		<br>
+    	{% endfor %}
+	</div>
+	<div class="box" style="width:200px">
+    	{% if review %}
+    	<h2>-----</h2>
+    	{% endif %}
+	    {% for kolom_2 in juduls.kolom_2 %}
+    		{% if review %}
+    		
+    		<a style="text-decoration: none" target="_blank" href="http://library.gunadarma.ac.id/epaper/search/?q={{kolom_2}}&judul=&nama=&pembimbing=">Lit Review Gunadarma</a>
+    	{% endif %}
+    		<br>
+    	{% endfor %}
+	</div>
+	<div class="after-box"></div>
+    
     <br>
     <div class="box">
 	    <h2>Kolom 1</h2>
@@ -33,7 +70,7 @@
 	</div>
 	<div class="box">
 	    <h2>Kolom 2</h2>
-	    <a href="/update-kolom-2">Update Isi Kolom 2</a><br>
+	    <!--a href="/update-kolom-2">Update Isi Kolom 2</a--><br>
 	    <ol>
 	    	{% for field in isi_kolom_2 %}
 	    		<li>{{field.word}}</li>
